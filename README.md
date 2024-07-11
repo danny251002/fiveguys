@@ -64,42 +64,6 @@
    - טבלאות לניהול משתמשים, מנות, הזמנות, ועגלות קניות.
 
 ## עץ הספריות והקבצים
-FiveGuys/
-├── run.py
-├── config.py
-├── add_menu_items.py
-└── app/
-├── init.py
-├── models/
-│ ├── user.py
-│ ├── menu_item.py
-│ └── order.py
-├── views/
-│ ├── main.py
-│ ├── auth.py
-│ ├── manager.py
-│ ├── worker.py
-│ └── customer.py
-└── templates/
-├── home.html
-├── base.html
-├── auth/
-│ ├── login.html
-│ └── register.html
-├── manager/
-│ ├── dashboard.html
-│ └── menu.html
-├── worker/
-│ ├── dashboard.html
-│ ├── orders.html
-│ └── completed_orders.html
-└── customer/
-├── menu.html
-├── cart.html
-└── order_history.html
-└── static/
-├── css/
-├── images/
-└── js/
+![עץ הספריות והקבצים](static/file-tree.png)
 
 </div>
