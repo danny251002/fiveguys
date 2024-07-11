@@ -64,6 +64,6 @@
    - טבלאות לניהול משתמשים, מנות, הזמנות, ועגלות קניות.
 
 ## עץ הספריות והקבצים
-![עץ הספריות והקבצים](app/static/file-tree.png)
+![עץ הספריות והקבצים](https://github.com/danny251002/fiveguys/blob/main/app/static/images/file_tree.png)
 
 </div>
