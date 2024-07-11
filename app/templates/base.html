@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Five Guys</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="{{ url_for('main.home') }}">Home</a></li>
+          {% if current_user.is_authenticated %} {% if current_user.role ==
+          'manager' %}
+          <li>
+            <a href="{{ url_for('manager.dashboard') }}">Manager Dashboard</a>
+          </li>
+          {% elif current_user.role == 'worker' %}
+          <li>
+            <a href="{{ url_for('worker.dashboard') }}">Worker Dashboard</a>
+          </li>
+          {% else %}
+          <li><a href="{{ url_for('customer.menu') }}">Menu</a></li>
+          <li>
+            <a href="{{ url_for('customer.order_history') }}">Order History</a>
+          </li>
+          {% endif %}
+          <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+          {% else %}
+          <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+          <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      {% with messages = get_flashed_messages() %} {% if messages %}
+      <div class="flash-messages">
+        {% for message in messages %}
+        <div class="flash-message">{{ message }}</div>
+        {% endfor %}
+      </div>
+      {% endif %} {% endwith %} {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Five Guys</p>
+    </footer>
+
+    {% block scripts %}{% endblock %}
+  </body>
+</html>

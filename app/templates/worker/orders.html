@@ -1,0 +1,25 @@
+{% extends "base.html" %} {% block content %}
+<h1>Pending Orders</h1>
+
+{% if orders %} {% for order in orders %}
+<div class="order">
+  <h2>Order #{{ order.id }}</h2>
+  <p>Date: {{ order.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+  <p>Customer: {{ order.user.username if order.user else 'Unknown' }}</p>
+  <p>Total: ${{ "%.2f"|format(order.total_price) }}</p>
+  <h3>Items:</h3>
+  <ul>
+    {% for item in order.items %}
+    <li>{{ item.quantity }}x {{ item.menu_item.name }}</li>
+    {% endfor %}
+  </ul>
+  <form
+    action="{{ url_for('worker.complete_order', order_id=order.id) }}"
+    method="POST"
+  >
+    <button type="submit" class="btn btn-primary">Mark as Completed</button>
+  </form>
+</div>
+{% endfor %} {% else %}
+<p>No pending orders at the moment.</p>
+{% endif %} {% endblock %}

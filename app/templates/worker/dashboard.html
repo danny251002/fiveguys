@@ -1,0 +1,13 @@
+{% extends "base.html" %} {% block content %}
+<h1>Worker Dashboard</h1>
+<nav>
+  <ul>
+    <li><a href="{{ url_for('worker.orders') }}">View Pending Orders</a></li>
+    <li>
+      <a href="{{ url_for('worker.completed_orders') }}"
+        >View Completed Orders</a
+      >
+    </li>
+  </ul>
+</nav>
+{% endblock %}

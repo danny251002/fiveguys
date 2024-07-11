@@ -1,0 +1,56 @@
+<!-- app/templates/customer/order.html -->
+
+{% extends "base.html" %} {% block content %}
+<h1>Place Your Order</h1>
+
+<form id="order-form" method="POST">
+  {% for category, items in menu_items|groupby('category') %}
+  <h2>{{ category }}</h2>
+  {% for item in items %}
+  <div class="menu-item">
+    <img src="{{ item.image_url }}" alt="{{ item.name }}" />
+    <div class="item-details">
+      <h3>{{ item.name }}</h3>
+      <p>{{ item.description }}</p>
+      <p>Price: ${{ "%.2f"|format(item.price) }}</p>
+      <label for="item_{{ item.id }}">Quantity:</label>
+      <input
+        type="number"
+        id="item_{{ item.id }}"
+        name="item_{{ item.id }}"
+        value="0"
+        min="0"
+        data-price="{{ item.price }}"
+      />
+
+      {% if item.is_customizable %}
+      <div class="customization-options">
+        <h4>Customization Options:</h4>
+        {% for option in item.customization_options %}
+        <div>
+          <input
+            type="checkbox"
+            id="custom_{{ item.id }}_{{ option.id }}"
+            name="custom_{{ item.id }}_{{ option.id }}"
+          />
+          <label for="custom_{{ item.id }}_{{ option.id }}"
+            >{{ option.name }} (+${{ "%.2f"|format(option.price) }})</label
+          >
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %} {% endfor %}
+  <button type="submit">Place Order</button>
+</form>
+
+<div class="cart">
+  <h2>Your Cart</h2>
+  <ul id="cart-items"></ul>
+  <p>Total: $<span id="cart-total">0.00</span></p>
+</div>
+{% endblock %} {% block scripts %}
+<script src="{{ url_for('static', filename='js/order.js') }}"></script>
+{% endblock %}

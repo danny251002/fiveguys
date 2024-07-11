@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block content %}
+<h1>Our Menu</h1>
+
+{% for category, items in categorized_items.items() %}
+<section class="menu-section">
+  <h2>{{ category }}</h2>
+  <div class="menu-grid">
+    {% for item in items %}
+    <div class="menu-item">
+      {% if item.image_url %}
+      <img
+        src="{{ url_for('static', filename='images/' + item.image_url) }}"
+        alt="{{ item.name }}"
+        class="menu-item-image"
+      />
+      {% endif %}
+      <h3>{{ item.name }}</h3>
+      <p>{{ item.description }}</p>
+      <p class="price">Price: ${{ "%.2f"|format(item.price) }}</p>
+      <form action="{{ url_for('customer.add_to_cart') }}" method="post">
+        <input type="hidden" name="menu_item_id" value="{{ item.id }}" />
+        <label for="quantity_{{ item.id }}">Quantity:</label>
+        <input
+          type="number"
+          id="quantity_{{ item.id }}"
+          name="quantity"
+          value="1"
+          min="1"
+        />
+        <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+      </form>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}
+
+<a href="{{ url_for('customer.view_cart') }}" class="btn">View Cart</a>
+
+{% endblock %} {% block scripts %}
+<script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+{% endblock %}

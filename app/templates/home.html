@@ -1,0 +1,55 @@
+<!-- app/templates/home.html -->
+
+{% extends "base.html" %} {% block content %}
+<div class="hero">
+  <h1>Welcome to Five Guys</h1>
+  <p>Delicious burgers and fries since 1986</p>
+  <a href="{{ url_for('customer.menu') }}" class="cta-button">View Menu</a>
+</div>
+
+<div class="featured-products">
+  <h2>Our Specialties</h2>
+  <div class="product-grid">
+    <div class="product-card">
+      <img
+        src="{{ url_for('static', filename='images/burger.jpeg') }}"
+        alt="Delicious Burger"
+      />
+      <h3>Classic Burger</h3>
+      <p>Our signature handcrafted burger with fresh ingredients</p>
+    </div>
+    <div class="product-card">
+      <img
+        src="{{ url_for('static', filename='images/CrispyFries_8.jpeg') }}"
+        alt="Crispy Fries"
+      />
+      <h3>Crispy Fries</h3>
+      <p>Hand-cut potatoes fried to perfection</p>
+    </div>
+    <div class="product-card">
+      <img
+        src="{{ url_for('static', filename='images/hotdog.jpeg') }}"
+        alt="Creamy Milkshake"
+      />
+      <h3>HotDog</h3>
+      <p>Tasty bavirian HotDog</p>
+    </div>
+  </div>
+</div>
+
+<div class="about-us">
+  <h2>About Our Restaurant</h2>
+  <img
+    src="{{ url_for('static', filename='images/about-img.png') }}"
+    alt="ABOUT US"
+    width="400px"
+    height="400px"
+  />
+
+  <p>
+    Founded in 1986, our burger restaurant has been serving handcrafted burgers
+    and fries for over three decades. We pride ourselves on using only the
+    freshest ingredients and cooking everything to order.
+  </p>
+</div>
+{% endblock %}
